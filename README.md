@@ -6,8 +6,8 @@ An automatic cloudflare DNS record updater for dynamic IP addresses.
 Once you execute the JAR, you will need to set up your configuration.
 
 Find the config.json from following location:
-* Linux: /home/<user>/.config/CloudflareDNSUpdater/config.json
-* Windows: C:\Users\<user>\AppData\Roaming\CloudflareDNSUpdater\config.json
+* Linux: /home/\<user>/.config/CloudflareDNSUpdater/config.json
+* Windows: C:\Users\\\<user>\AppData\Roaming\CloudflareDNSUpdater\config.json
 
 You should get an API token with the following permissions:
 * Zone:Read
