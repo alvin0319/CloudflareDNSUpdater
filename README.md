@@ -45,7 +45,7 @@ To uninstall service, simply run: `.\cfdnsupdater.exe uninstall`
 
 ## Ubuntu
 Put the following contents in `/etc/systemd/system/cfdnsupdater.service`, with replacing the needed things. (you may need sudo to perform this action)
-```toml
+```
 [Unit]
 Description=Cloudflare DNS Updater
 After=network.target
