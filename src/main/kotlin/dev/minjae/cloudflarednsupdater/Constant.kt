@@ -6,16 +6,24 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.brotli.BrotliInterceptor
+import java.nio.file.InvalidPathException
 import java.nio.file.Path
 import java.nio.file.Paths
 
 object Constant {
 
-    val appDataDir: Path = if (System.getProperty("os.name").contains("windows", ignoreCase = true)) {
-        Paths.get(System.getenv("APPDATA")).resolve("CloudflareDNSUpdater")
+    val appDataDir: Path = if (System.getProperty("workDir", "").isNotEmpty()) {
+        Paths.get(System.getProperty("workDir"))
     } else {
-        Paths.get(System.getProperty("user.home")).resolve(".config").resolve("CloudflareDNSUpdater")
+        if (System.getProperty("os.name").contains("windows", ignoreCase = true)) {
+            Paths.get(System.getenv("APPDATA")).resolve("CloudflareDNSUpdater")
+        } else {
+            Paths.get(System.getProperty("user.home")).resolve(".config").resolve("CloudflareDNSUpdater")
+        }
     }.apply {
+        if (!toFile().canRead() || !toFile().canWrite()) {
+            throw InvalidPathException(this.toString(), "Cannot read or write to the directory")
+        }
         if (!toFile().exists()) {
             toFile().mkdirs()
         }

@@ -9,6 +9,9 @@ Find the config.json from following location:
 * Linux: /home/\<user>/.config/CloudflareDNSUpdater/config.json
 * Windows: C:\Users\\\<user>\AppData\Roaming\CloudflareDNSUpdater\config.json
 
+Or, you can specify the location of the config.json file by adding following option:
+-DworkDir=\<absolute path>
+
 You should get an API token with the following permissions:
 * Zone:Read
 * Zone:Edit
