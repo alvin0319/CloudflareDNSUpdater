@@ -1,0 +1,10 @@
+<service>
+    <id>Cloudflare DNS Updater</id>
+    <name>Cloudflare DNS Updater</name>
+    <description>Automatic update of Cloudflare DNS record</description>>
+    <workingdirectory>[CHANGE ME]</workingdirectory>
+    <logpath>[CHANGE ME]</logpath>
+
+    <executable>java</executable>
+    <arguments>-Xms512M -Xmx1G -jar [CHANGE ME TO ABSOLUTE PATH OF JAR]</arguments><!-- Change this -->
+</service>

@@ -28,3 +28,41 @@ You should get an API token with the following permissions:
 	"domainName": "" // the domain name you want to update/create
 }
 ```
+
+# Adding CloudflareDNSUpdater as a service
+There are several ways to add CloudflareDNSUpdater as a service.
+
+## Windows
+Window service system is sucks, I suggest you to use a [WinSW](https://github.com/winsw/winsw/releases).
+
+1. Download both JAR and WinSW.
+2. Create a folder named CloudflareDNSUpdater and put the JAR and WinSW in it.
+3. Rename WinSW.exe to cfdnsupdater.exe
+4. Copy the [cfdnsupdater.xml](./assets/cfdnsupdater.xml) to the folder, and change things as you need.
+5. Open CMD, run `.\cfdnsupdater.exe install` (this may require administrator privilege)
+
+To uninstall service, simply run: `.\cfdnsupdater.exe uninstall`
+
+## Ubuntu
+Put the following contents in `/etc/systemd/system/cfdnsupdater.service`, with replacing the needed things. (you may need sudo to perform this action)
+```toml
+[Unit]
+Description=Cloudflare DNS Updater
+After=network.target
+
+[Service]
+User=root
+Environment=
+WorkingDirectory=<path to the folder>
+ExecStart=java -Xms512M -Xmx1G -Dworkdir=<path to the folder> -jar <path to the jar>
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then execute the following commands:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now cfdnsupdater.service
+```
